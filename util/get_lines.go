@@ -3,6 +3,7 @@ package util
 import (
 	"bufio"
 	"os"
+	"slices"
 )
 
 // GetGrid reads lines from file and returns them as a slice of []byte.
@@ -13,7 +14,7 @@ func GetGrid(filename string) [][]byte {
 	scanner := bufio.NewScanner(f)
 	ret := make([][]byte, 0)
 	for scanner.Scan() {
-		ret = append(ret, scanner.Bytes())
+		ret = append(ret, slices.Clone(scanner.Bytes()))
 	}
 	return ret
 }

@@ -15,6 +15,7 @@
         "--input",
         "${input:Example}",
         "${input:Day}",
+        "${input:Part}",
       ],
       "showGlobalVariables": true,
       "hideSystemGoroutines": true,
@@ -35,6 +36,17 @@
         "{day}/input.txt",
       ],
       "default": "{day}/input.txt",
+    },
+    {
+      "id": "Part",
+      "type": "pickString",
+      "description": "Which part of the puzzle to run",
+      "options": [
+        "0",
+        "1",
+        "2",
+      ],
+      "default": "0",
     },
   ],
 }

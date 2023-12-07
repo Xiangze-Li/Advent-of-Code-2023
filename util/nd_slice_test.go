@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math"
 	"reflect"
-	"strings"
 	"testing"
 )
 
@@ -241,19 +240,17 @@ func TestReduceMap(t *testing.T) {
 		result interface{}
 	}{
 		{
-			name: "Concat strings",
+			name: "Sum keys and values",
 			reduce: func() any {
 				return util.ReduceMap(
-					map[string]string{"Hello": " ", "World": "!", "!": "\n"},
-					func(acc *strings.Builder, k, v string) *strings.Builder {
-						acc.WriteString(k)
-						acc.WriteString(v)
-						return acc
+					map[int64]int64{1: 2, 3: 4, 5: 6},
+					func(acc [2]int64, k, v int64) [2]int64 {
+						return [2]int64{acc[0] + k, acc[1] + v}
 					},
-					new(strings.Builder),
-				).String()
+					[2]int64{-1000, -1000000},
+				)
 			},
-			result: "Hello World!!\n",
+			result: [2]int64{-1000 + 1 + 3 + 5, -1000000 + 2 + 4 + 6},
 		},
 	}
 
